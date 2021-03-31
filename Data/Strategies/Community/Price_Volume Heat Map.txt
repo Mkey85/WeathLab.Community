@@ -1,0 +1,143 @@
+1|51|00|21|Price/Volume Heat Map166|Price/Volume Heat Map seems to help in identifying congestion areas as well as "resistance becoming support" scenarios. 
+
+Credit goes to Andrew Vishnyakov (avishn).6|Eugene18|6374924403980380920|9|Utilities4116|using WealthLab.Backtest;
+using System;
+using WealthLab.Core;
+using WealthLab.Indicators;
+using System.Drawing;
+using System.Collections.Generic;
+
+namespace WealthScript2 
+{
+    public class PriceVolumeHeatMap_ : UserStrategyBase
+    {
+		int lookback = 50, binCount = 20;
+
+		public PriceVolumeHeatMap_()
+		{
+			AddParameter("Lookback", ParameterTypes.Int32, 50, 20, 100, 10);
+			AddParameter("Bins", ParameterTypes.Int32, 10, 10, 50, 10);
+		}
+
+		public override void Initialize(BarHistory bars)
+		{
+			lookback = Parameters.FindByOptParamName("Lookback", false).AsInt;
+			binCount = Parameters.FindByOptParamName("Bins", false).AsInt;
+
+			if (bars.Count <= lookback)
+				throw new Exception("Not enough data to create plot");
+
+			DrawHeaderText(string.Format(
+				"1. Take price and volume information over lookback period (last {0} bars)\n" +
+				"2. Split price range into a number of bins\n" +
+				"3. Calculate EMA of volume for each bin over the lookback period\n" +
+				"4. Calculate standard deviation (SD) for all bins at the given bar\n" +
+				"5. Plot it using yellow for volume values within SD range and red for volume above SD", lookback), Color.Black, 14);
+					
+			StartIndex = lookback;
+        }
+
+        public override void Execute(BarHistory bars, int bar)
+        {
+			PriceVolumeHeatMap(bars, bar, lookback, binCount);
+        }
+
+		void PriceVolumeHeatMap(BarHistory bars, int currentBar, int lookback, int binCount)
+		{
+			double[] bins = new double[binCount];
+			int[] a = new int[binCount];
+			int[] r = new int[binCount];
+			int[] g = new int[binCount];
+			int[] b = new int[binCount];
+
+			// get price range
+			double lp = Lowest.Value(currentBar, bars.Low, lookback);
+			double hp = Highest.Value(currentBar, bars.High, lookback);
+			double stp = (hp - lp) / binCount;
+
+			// put volume into bins   
+			double alpha = 1.0 / (1.0 + lookback);
+			for (int bin = 0; bin < binCount; bin++)
+			{
+				double y = lp + stp * bin;
+				for (int bar = currentBar - lookback + 1; bar <= currentBar; bar++)
+				{
+					double v = 0.0;
+					if ((y <= bars.High[bar]) && (bars.Low[bar] <= (y + stp)))
+					{
+						v = bars.Volume[bar];
+					}
+					bins[bin] = bins[bin] + alpha * (v - bins[bin]);
+				}
+			}
+
+			// normalize and calculate mean
+			double minVol = Double.PositiveInfinity;
+			double maxVol = Double.NegativeInfinity;
+			for (int bin = 0; bin < binCount; bin++)
+			{
+				minVol = Math.Min(bins[bin], minVol);
+				maxVol = Math.Max(bins[bin], maxVol);
+			}
+			double mean = 0.0;
+			for (int bin = 0; bin < binCount; bin++)
+			{
+				bins[bin] = (bins[bin] - minVol) / (maxVol - minVol);
+				mean += bins[bin];
+			}
+			mean /= binCount;
+
+			// calculate standard deviation
+			double stdDev = 0.0;
+			for (int bin = 0; bin < binCount; bin++)
+			{
+				stdDev += (bins[bin] - mean) * (bins[bin] - mean);
+			}
+			stdDev = Math.Sqrt(stdDev / binCount);
+			double stdDevFac = 1.0;
+			for (int bin = 0; bin < binCount; bin++)
+			{
+				if (bins[bin] < (mean - stdDevFac * stdDev))
+				{
+					r[bin] = 255; g[bin] = 255; b[bin] = 255;
+				}
+				else if (bins[bin] > (mean + stdDevFac * stdDev))
+				{
+					r[bin] = 255; g[bin] = 255 / 4; b[bin] = 255 / 4;
+				}
+				else
+				{
+					r[bin] = 255; g[bin] = 255; b[bin] = 0;
+				}
+				a[bin] = System.Convert.ToInt32(bins[bin] * 255 / 2);
+			}
+
+			// plot
+			for (int bin = 0; bin < binCount; bin++)
+			{
+				double y = lp + stp * bin;
+				List<IChartPoint> points = new List<IChartPoint>() 
+				{ 
+					new ChartPoint(currentBar - 1, y), 
+					new ChartPoint(currentBar - 1, y + stp), 
+					new ChartPoint(currentBar, y + stp), 
+					new ChartPoint(currentBar, y)
+				};
+				Color c = Color.FromArgb(a[bin], r[bin], g[bin], b[bin]);
+				DrawPolygon(points, c, 0,  LineStyles.Solid);
+				FillPolygon(points, c);
+			}
+		}
+	}
+
+	public class ChartPoint : IChartPoint
+	{
+		public int XIndex { get; set; }
+		public double YValue { get; set; }
+
+		public ChartPoint(int x, Double y)
+		{
+			XIndex = x; YValue = y;
+		}
+	}
+}18|Argentina - MerVal17|2|V31|01|15|False14|1|13|3001|01|043|2|V41|04|50006|1000001|11|01|01|01|05|False0|4|True3|SPY3|SPY4|True0|5|False

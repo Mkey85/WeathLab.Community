@@ -1,0 +1,134 @@
+1|51|00|25|Price/Volume Distribution263|A price-volume distribution is the total volume traded in price ranges (or bins) displayed in relative terms as horizontal bars alongside the right chart axis. The price-volume distribution is calculated for the number of bars specified in the Lookback parameter.6|Eugene18|6374925346989214600|9|Utilities3389|using WealthLab.Backtest;
+using System;
+using WealthLab.Core;
+using WealthLab.Indicators;
+using System.Drawing;
+using System.Collections.Generic;
+
+namespace WealthScript1 
+{
+    public class PriceVolumeDistribution_ : UserStrategyBase
+    {
+		int lookback = 250;
+
+		public PriceVolumeDistribution_()
+		{
+			AddParameter("Lookback", ParameterTypes.Int32, 250, 50, 500, 50);
+		}
+
+		public override void Initialize(BarHistory bars)
+		{
+			lookback = Parameters.FindByOptParamName("Lookback", false).AsInt;
+
+			if (bars.Count <= lookback)
+				throw new Exception("Not enough data to create plot");
+
+			DrawHeaderText(string.Format(
+				"A price-volume distribution is the total volume traded in price ranges (or bins) displayed as horizontal bars alongside the right chart axis.\n" +
+				"It is calculated over lookback period of {0}", lookback), Color.Black, 14);
+				
+			StartIndex = lookback;
+        }
+
+        public override void Execute(BarHistory bars, int bar)
+        {
+			PriceVolumeDistribution(bars, lookback, Color.Blue, Color.FromArgb( 30, Color.Blue ));
+        }
+
+		void PriceVolumeDistribution(BarHistory bars, int Lookback, Color LineColor, Color FillColor)
+		{
+			double p1 = 0; double p2 = 0; double xInc = 0;
+			double vol = 0; double maxvol = 0; int nBin = 0;
+			int bar = bars.Count - 1;
+			List<double> lstBin = new List<double>();
+			List<double> lstVal = new List<double>();
+
+			int Start = bar - Lookback;
+			if (Start < 0)
+				Start = 0;
+
+			int Span = bar - Start + 1;
+			double xHigh = Highest.Value(bar, bars.Close, Span);
+			double xLow = Lowest.Value(bar, bars.Close, Span);
+			double xRange = xHigh - xLow;
+
+			if (xRange > 10000) xInc = 1000;
+			else
+				if (xRange > 1000) xInc = 100;
+			else
+					if (xRange > 100) xInc = 10;
+			else
+						if (xRange > 10) xInc = 1;
+			else
+							if (xRange > 1) xInc = 0.5;
+			else
+				xInc = 0.25;
+
+			double xBin = Math.Floor(xLow / xInc);
+			xBin *= xInc;
+
+			lstBin.Add(xBin);
+			lstVal.Add(0);
+
+			while (xBin <= xHigh)
+			{
+				xBin += xInc;
+				lstBin.Add(xBin);
+				lstVal.Add(0);
+			}
+
+			maxvol = 0;
+
+			for (int b = Start; b <= bar; b++)
+			{
+				for (nBin = 0; nBin <= lstBin.Count - 1; nBin++)
+				{
+					xBin = lstBin[nBin];
+					if (bars.Close[b] <= xBin)
+						break;
+				}
+
+				vol = lstVal[nBin];
+				vol += Math.Round(bars.Volume[b]);
+				if (nBin <= lstVal.Count - 1)
+					lstVal[nBin] = vol;
+
+				if (vol > maxvol)
+					maxvol = vol;
+			}
+
+			for (nBin = 0; nBin <= lstBin.Count - 1; nBin++)
+			{
+				xBin = lstBin[nBin];
+				p1 = xBin - xInc / 2;
+				p2 = xBin + xInc / 2;
+				vol = lstVal[nBin];
+				int b1 = bars.Count - (int)Math.Round(100d * (vol / maxvol));
+				if (vol < 1) continue;
+				int b2 = bars.Count - 1;
+				double[] rectangle = { b1, p1, b1, p2, b2, p2, b2, p1 };
+				List<IChartPoint> points = new List<IChartPoint>()
+				{
+					new ChartPoint(b1, p1),
+					new ChartPoint(b1, p2),
+					new ChartPoint(b2, p2),
+					new ChartPoint(b2, p1)
+				};
+				
+				DrawPolygon(points, LineColor, 1, LineStyles.Solid);
+				FillPolygon(points, FillColor);
+			}
+		}
+	}
+
+	public class ChartPoint : IChartPoint
+	{
+		public int XIndex { get; set; }
+		public double YValue { get; set; }
+
+		public ChartPoint(int x, Double y)
+		{
+			XIndex = x; YValue = y;
+		}
+	}
+}18|Argentina - MerVal17|2|V31|01|15|False13|1|22|101|01|043|2|V41|04|50006|1000001|11|01|01|01|05|False0|4|True3|SPY3|SPY4|True0|5|False

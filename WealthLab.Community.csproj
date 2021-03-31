@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <UseWPF>true</UseWPF>
+    <Version>7.0.1</Version>
+    <AssemblyVersion>7.0.1.0</AssemblyVersion>
+    <FileVersion>7.0.1.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\Strategies\Community\Price_Volume Distribution.txt" />
+    <None Remove="Data\Strategies\Community\Price_Volume Heat Map.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Strategies\Community\Price_Volume Distribution.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Strategies\Community\Price_Volume Heat Map.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WealthLab.Backtest\WealthLab.Backtest.csproj" />
+    <ProjectReference Include="..\WealthLab.Core\WealthLab.Core.csproj" />
+    <ProjectReference Include="..\WealthLab.Data\WealthLab.Data.csproj" />
+    <ProjectReference Include="..\WealthLab.Indicators\WealthLab.Indicators.csproj" />
+    <ProjectReference Include="..\WealthLab.WPF\WealthLab.WPF.csproj" />
+  </ItemGroup>
+
+</Project>
