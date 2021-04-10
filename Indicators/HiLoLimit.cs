@@ -35,49 +35,19 @@ namespace WealthLab.Indicators
         }
 
         //name
-        public override string Name
-        {
-            get
-            {
-                return "HiLoLimit";
-            }
-        }
+        public override string Name => "HiLoLimit";
 
         //abbreviation
-        public override string Abbreviation
-        {
-            get
-            {
-                return "HiLoLimit";
-            }
-        }
+        public override string Abbreviation => "HiLoLimit";
 
         //description
-        public override string HelpDescription
-        {
-            get
-            {
-                return "The HiLoLimit indicator developed by Dr.Koch is a lag-free limit based on highest/lowest levels.";
-            }
-        }
+        public override string HelpDescription => "The HiLoLimit indicator developed by Dr.Koch is a lag-free limit based on highest/lowest levels.";
 
         //price pane
-        public override string PaneTag
-        {
-            get
-            {
-                return "Price";
-            }
-        }
+        public override string PaneTag => "Price";
 
         //default color
-        public override Color DefaultColor
-        {
-            get
-            {
-                return Color.Blue;
-            }
-        }
+        public override Color DefaultColor => Color.Blue;
 
         //populate
         public override void Populate()
