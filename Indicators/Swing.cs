@@ -1134,7 +1134,7 @@ namespace WealthLab.Community
             AddParameter("Left Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
-            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
+            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001).StepValue = 0.000001;
             AddParameter("Percent Mode", ParameterTypes.Boolean, false);
             AddParameter("Set Left Swings", ParameterTypes.Boolean, false);
             AddParameter("Set Outer Swings", ParameterTypes.Boolean, false);
@@ -1531,7 +1531,7 @@ namespace WealthLab.Community
             AddParameter("Left Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
-            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
+            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001).StepValue = 0.000001;
             AddParameter("Percent Mode", ParameterTypes.Boolean, false);
             AddParameter("Set Left Swings", ParameterTypes.Boolean, false);
             AddParameter("Set Outer Swings", ParameterTypes.Boolean, false);
@@ -1923,7 +1923,7 @@ namespace WealthLab.Community
             AddParameter("Left Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
-            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
+            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001).StepValue = 0.000001;
             AddParameter("Percent Mode", ParameterTypes.Boolean, false);
             AddParameter("Set Left Swings", ParameterTypes.Boolean, false);
             AddParameter("Set Outer Swings", ParameterTypes.Boolean, false);
