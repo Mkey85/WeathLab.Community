@@ -1100,10 +1100,10 @@ namespace WealthLab.Community
             Int32 rightBars = Parameters[3].AsInt;
             Double rightReversalAmount = Parameters[4].AsDouble;
             Double equalPriceThreshold = Parameters[5].AsDouble;
-            bool percentMode = Parameters[6].AsInt == 0 ? false : true;
-            bool setLeftSwings = Parameters[7].AsInt == 0 ? false : true;
-            bool setOuterSwings = Parameters[8].AsInt == 0 ? false : true;
-            bool setSteppedSeries = Parameters[9].AsInt == 0 ? false : true;
+            bool percentMode = Parameters[6].AsBoolean;
+            bool setLeftSwings = Parameters[7].AsBoolean;
+            bool setOuterSwings = Parameters[8].AsBoolean;
+            bool setSteppedSeries = Parameters[9].AsBoolean;
 
             DateTimes = source.DateTimes;
             int period = Math.Max(leftBars, rightBars);
@@ -1135,10 +1135,10 @@ namespace WealthLab.Community
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
-            AddParameter("Percent Mode", ParameterTypes.Int32, 0);
-            AddParameter("Set Left Swings", ParameterTypes.Int32, 0);
-            AddParameter("Set Outer Swings", ParameterTypes.Int32, 0);
-            AddParameter("Set Stepped Series", ParameterTypes.Int32, 0);
+            AddParameter("Percent Mode", ParameterTypes.Boolean, false);
+            AddParameter("Set Left Swings", ParameterTypes.Boolean, false);
+            AddParameter("Set Outer Swings", ParameterTypes.Boolean, false);
+            AddParameter("Set Stepped Series", ParameterTypes.Boolean, false);
         }
     }
 
@@ -1498,10 +1498,10 @@ namespace WealthLab.Community
             Int32 rightBars = Parameters[3].AsInt;
             Double rightReversalAmount = Parameters[4].AsDouble;
             Double equalPriceThreshold = Parameters[5].AsDouble;
-            bool percentMode = Parameters[6].AsInt == 0 ? false : true;
-            bool setLeftSwings = Parameters[7].AsInt == 0 ? false : true;
-            bool setOuterSwings = Parameters[8].AsInt == 0 ? false : true;
-            bool setSteppedSeries = Parameters[9].AsInt == 0 ? false : true;
+            bool percentMode = Parameters[6].AsBoolean;
+            bool setLeftSwings = Parameters[7].AsBoolean;
+            bool setOuterSwings = Parameters[8].AsBoolean;
+            bool setSteppedSeries = Parameters[9].AsBoolean;
 
             DateTimes = source.DateTimes;
             int period = Math.Max(leftBars, rightBars);
@@ -1532,10 +1532,10 @@ namespace WealthLab.Community
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
-            AddParameter("Percent Mode", ParameterTypes.Int32, 0);
-            AddParameter("Set Left Swings", ParameterTypes.Int32, 0);
-            AddParameter("Set Outer Swings", ParameterTypes.Int32, 0);
-            AddParameter("Set Stepped Series", ParameterTypes.Int32, 0);
+            AddParameter("Percent Mode", ParameterTypes.Boolean, false);
+            AddParameter("Set Left Swings", ParameterTypes.Boolean, false);
+            AddParameter("Set Outer Swings", ParameterTypes.Boolean, false);
+            AddParameter("Set Stepped Series", ParameterTypes.Boolean, false);
         }
     }
 
@@ -1890,10 +1890,10 @@ namespace WealthLab.Community
             Int32 rightBars = Parameters[3].AsInt;
             Double rightReversalAmount = Parameters[4].AsDouble;
             Double equalPriceThreshold = Parameters[5].AsDouble;
-            bool percentMode = Parameters[6].AsInt == 0 ? false : true;
-            bool setLeftSwings = Parameters[7].AsInt == 0 ? false : true;
-            bool setOuterSwings = Parameters[8].AsInt == 0 ? false : true;
-            bool setSteppedSeries = Parameters[9].AsInt == 0 ? false : true;
+            bool percentMode = Parameters[6].AsBoolean;
+            bool setLeftSwings = Parameters[7].AsBoolean;
+            bool setOuterSwings = Parameters[8].AsBoolean;
+            bool setSteppedSeries = Parameters[9].AsBoolean;
 
             DateTimes = source.DateTimes;
             int period = Math.Max(leftBars, rightBars);
@@ -1924,10 +1924,10 @@ namespace WealthLab.Community
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
-            AddParameter("Percent Mode", ParameterTypes.Int32, 0);
-            AddParameter("Set Left Swings", ParameterTypes.Int32, 0);
-            AddParameter("Set Outer Swings", ParameterTypes.Int32, 0);
-            AddParameter("Set Stepped Series", ParameterTypes.Int32, 0);
+            AddParameter("Percent Mode", ParameterTypes.Boolean, false);
+            AddParameter("Set Left Swings", ParameterTypes.Boolean, false);
+            AddParameter("Set Outer Swings", ParameterTypes.Boolean, false);
+            AddParameter("Set Stepped Series", ParameterTypes.Boolean, false);
         }
     }
 }
