@@ -1099,7 +1099,7 @@ namespace WealthLab.Community
             Double leftReversalAmount = Parameters[2].AsDouble;
             Int32 rightBars = Parameters[3].AsInt;
             Double rightReversalAmount = Parameters[4].AsDouble;
-            Int32 equalPriceThreshold = Parameters[5].AsInt;
+            Double equalPriceThreshold = Parameters[5].AsDouble;
             bool percentMode = Parameters[6].AsInt == 0 ? false : true;
             bool setLeftSwings = Parameters[7].AsInt == 0 ? false : true;
             bool setOuterSwings = Parameters[8].AsInt == 0 ? false : true;
@@ -1134,7 +1134,7 @@ namespace WealthLab.Community
             AddParameter("Left Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
-            AddParameter("Equal Price Threshold", ParameterTypes.Int32, 5);
+            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
             AddParameter("Percent Mode", ParameterTypes.Int32, 0);
             AddParameter("Set Left Swings", ParameterTypes.Int32, 0);
             AddParameter("Set Outer Swings", ParameterTypes.Int32, 0);
@@ -1497,7 +1497,7 @@ namespace WealthLab.Community
             Double leftReversalAmount = Parameters[2].AsDouble;
             Int32 rightBars = Parameters[3].AsInt;
             Double rightReversalAmount = Parameters[4].AsDouble;
-            Int32 equalPriceThreshold = Parameters[5].AsInt;
+            Double equalPriceThreshold = Parameters[5].AsDouble;
             bool percentMode = Parameters[6].AsInt == 0 ? false : true;
             bool setLeftSwings = Parameters[7].AsInt == 0 ? false : true;
             bool setOuterSwings = Parameters[8].AsInt == 0 ? false : true;
@@ -1531,7 +1531,7 @@ namespace WealthLab.Community
             AddParameter("Left Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
-            AddParameter("Equal Price Threshold", ParameterTypes.Int32, 5);
+            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
             AddParameter("Percent Mode", ParameterTypes.Int32, 0);
             AddParameter("Set Left Swings", ParameterTypes.Int32, 0);
             AddParameter("Set Outer Swings", ParameterTypes.Int32, 0);
@@ -1889,7 +1889,7 @@ namespace WealthLab.Community
             Double leftReversalAmount = Parameters[2].AsDouble;
             Int32 rightBars = Parameters[3].AsInt;
             Double rightReversalAmount = Parameters[4].AsDouble;
-            Int32 equalPriceThreshold = Parameters[5].AsInt;
+            Double equalPriceThreshold = Parameters[5].AsDouble;
             bool percentMode = Parameters[6].AsInt == 0 ? false : true;
             bool setLeftSwings = Parameters[7].AsInt == 0 ? false : true;
             bool setOuterSwings = Parameters[8].AsInt == 0 ? false : true;
@@ -1923,7 +1923,7 @@ namespace WealthLab.Community
             AddParameter("Left Reversal Amount", ParameterTypes.Double, 3.5);
             AddParameter("Right Bars", ParameterTypes.Int32, 13);
             AddParameter("Right Reversal Amount", ParameterTypes.Double, 3.5);
-            AddParameter("Equal Price Threshold", ParameterTypes.Int32, 5); 
+            AddParameter("Equal Price Threshold", ParameterTypes.Double, 0.000001);
             AddParameter("Percent Mode", ParameterTypes.Int32, 0);
             AddParameter("Set Left Swings", ParameterTypes.Int32, 0);
             AddParameter("Set Outer Swings", ParameterTypes.Int32, 0);
