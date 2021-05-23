@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using WealthLab.Backtest;
+using WealthLab.Core;
+using WealthLab.Indicators;
 
 namespace WealthLab.Community
 {
@@ -48,6 +50,30 @@ namespace WealthLab.Community
                     obj.DrawBarAnnotation(position.ExitSignalName, position.ExitBar, position.PositionType == PositionType.Short, Color.Black, 12);
                 }
             }
+        }
+
+        /* Usage: run in Execute:
+        public override void Execute(BarHistory bars, int idx)
+        {
+            Color col = new Color();
+            if (idx >= bars.Count-100)
+            {
+				if ( bars.Close[idx] > bars.Close[idx - 50])
+					col = Color.Green;
+				else col = Color.Red;
+
+				DrawLinRegChannel(idx, bars.AveragePriceHL, 45, 2, Color.FromArgb(30, col), PlotStyles.Line, 2);
+            }
+        } 
+        */
+
+        public static void DrawLinRegChannel(this UserStrategyBase obj, int bar, TimeSeries series, int period, double width, Color color, PlotStyles style, int line)
+        {
+            double Slope = (period - 1) * LRSlope.Series(series, period)[bar];
+            double Intercept = LR.Series(series, period)[bar];
+            width *= StdError.Series(series, period)[bar];
+            obj.DrawLine(bar - (period - 1), Intercept - Slope - width, bar, Intercept - width, color, 1);
+            obj.DrawLine(bar - (period - 1), Intercept - Slope + width, bar, Intercept + width, color, 1);
         }
     }
 }
