@@ -63,7 +63,7 @@ namespace WealthLab.Community
             bool haveSL = false;
             bool haveSH = false;
             for (int bar = 0; bar < ds.Count; bar++)
-                Values.Add(ds[bar]);
+                Add(ds.Values[bar], ds.DateTimes[bar]);
 
             for (int bar = 0; bar < ds.Count; bar++)
             {
@@ -255,7 +255,7 @@ namespace WealthLab.Community
             bool requireRightThreshold = rightThreshold <= 0 ? false : true;
 
             for (int bar = 0; bar < ds.Count; bar++)
-                Values.Add(ds[bar]);
+                Add(ds.Values[bar], ds.DateTimes[bar]);
 
             for (int bar = 0; bar < ds.Count; bar++)
             {
@@ -570,7 +570,7 @@ namespace WealthLab.Community
             bool haveSL = false;
             bool haveSH = false;
             for (int bar = 0; bar < bars.Count; bar++)
-                Values.Add(bars.Close[bar]);
+                Add(bars.Close[bar], bars.DateTimes[bar]);
 
             for (int bar = 0; bar < bars.Count; bar++)
             {
@@ -762,7 +762,7 @@ namespace WealthLab.Community
             bool requireLeftThreshold = leftThreshold <= 0 ? false : true;
             bool requireRightThreshold = rightThreshold <= 0 ? false : true;
             for (int bar = 0; bar < bars.Count; bar++)
-                Values.Add(bars.Close[bar]);
+                Add(bars.Close[bar], bars.DateTimes[bar]);
 
             for (int bar = 0; bar < bars.Count; bar++)
             {
@@ -1188,7 +1188,7 @@ namespace WealthLab.Community
             bool haveSH = false;
 
             for (int bar = 0; bar < ds.Count; bar++)
-                Values.Add(ds[bar]);
+                Add(ds[bar], ds.DateTimes[bar]);
 
             for (int bar = 0; bar < ds.Count; bar++)
             {
@@ -1297,7 +1297,7 @@ namespace WealthLab.Community
             bool requireRightThreshold = rightThreshold <= 0 ? false : true;
 
             for (int bar = 0; bar < ds.Count; bar++)
-                Values.Add(ds[bar]);
+                Add(ds[bar], ds.DateTimes[bar]);
 
             for (int bar = 0; bar < ds.Count; bar++)
             {
@@ -1587,7 +1587,7 @@ namespace WealthLab.Community
             bool haveSL = false;
 
             for (int bar = 0; bar < ds.Count; bar++)
-                Values.Add(ds[bar]);
+                Add(ds[bar], ds.DateTimes[bar]);
 
             for (int bar = 0; bar < ds.Count; bar++)
             {
@@ -1690,7 +1690,7 @@ namespace WealthLab.Community
             bool requireRightThreshold = rightThreshold <= 0 ? false : true;
 
             for (int bar = 0; bar < ds.Count; bar++)
-                Values.Add(ds[bar]);
+                Add(ds[bar], ds.DateTimes[bar]);
 
             for (int bar = 0; bar < ds.Count; bar++)
             {
