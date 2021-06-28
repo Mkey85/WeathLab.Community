@@ -1,9 +1,9 @@
-﻿using WealthLab.Core;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
+using WealthLab.Core;
+using WealthLab.Indicators;
 
-namespace WealthLab.Indicators
+namespace WealthLab.Community
 {
     public class HiLoLimit : IndicatorBase
     {
